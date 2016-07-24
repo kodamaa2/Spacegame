@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -64,6 +65,13 @@ class StageView extends SurfaceView implements SurfaceHolder.Callback {
         // fürs erste nur Spieler als Kreis zeichnen
         paint.setColor(Color.GREEN);
         canvas.drawCircle(myPlayer.getPosX(), myPlayer.getPosY(), 20, paint);
+    }
+
+    public boolean onTouchEvent (MotionEvent event) {
+        if (event.getAction()!=MotionEvent.ACTION_DOWN) {
+
+        }
+        return true;
     }
 
     @Override
