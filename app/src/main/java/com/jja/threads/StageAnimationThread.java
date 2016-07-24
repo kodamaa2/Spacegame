@@ -14,12 +14,12 @@ public class StageAnimationThread extends Thread {
 
     public boolean stop = false; // boolean um festzustellen ob die Schleife weiter durchlaufen werden soll
     private SurfaceHolder surfaceHolder;
-    private StageView sV;
+    private StageView stageView;
 
     // constructor
     public StageAnimationThread(SurfaceHolder surfaceHolder, StageView stageView) {
         this.surfaceHolder = surfaceHolder;
-        this.sV = stageView;
+        this.stageView = stageView;
     }
 
     // methode die vom Thread durchgeführt wird ( mit Thread.start() oben )
@@ -37,7 +37,7 @@ public class StageAnimationThread extends Thread {
                 synchronized (surfaceHolder) {
                     if (c!=null)
                         // SpacegameView neu zeichnen
-                        sV.onDraw(c);
+                        stageView.onDraw(c);
                 }
             } finally {
                 if (c != null) surfaceHolder.unlockCanvasAndPost(c); // "Finish editing pixels in the surface."
