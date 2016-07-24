@@ -26,5 +26,7 @@ public class Enemy {
         this.posY += deltay;
     }
 
-
+    public void updateHealth(int deltaHealth){
+        this.health += deltaHealth;
+    }
 }
