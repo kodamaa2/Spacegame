@@ -7,8 +7,8 @@ public class Enemy {
 
 
 
-    int eid, health, posX, posY;
-    double hitboxradius, firerate;
+    private int eid, health, posX, posY;
+    private double hitboxradius, firerate;
 
     public Enemy(int id, int hp, int x, int y, double rad, double frate){
         this.eid = id;

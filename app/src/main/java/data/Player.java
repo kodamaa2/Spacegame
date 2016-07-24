@@ -4,8 +4,8 @@ package data;
  * Created by Julius on 24.07.2016.
  */
 public class Player {
-    int health, posX, posY;
-    double hitboxradius, firerate;
+    private int health, posX, posY;
+    private double hitboxradius, firerate;
 
     public Player(int health, int posX, int posY, double hitboxradius, double firerate) {
         this.health = health;
