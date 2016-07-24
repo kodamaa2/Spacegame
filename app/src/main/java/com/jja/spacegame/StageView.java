@@ -54,13 +54,20 @@ public class StageView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public boolean onTouchEvent (MotionEvent event) {
+        int newPosX = (int) event.getX();
+        int newPosY = (int) event.getY();
+        int curPosX = myPlayer.getPosX();
+        int curPosY = myPlayer.getPosY();
+        int deltaPosX = newPosX - curPosX;
+        int deltaPosY = newPosY - curPosY;
+
         if (event.getAction()== MotionEvent.ACTION_DOWN) {
-            myPlayer.setPosX((int) event.getX());
-            myPlayer.setPosY((int) event.getY());
+            myPlayer.setPosX(curPosX + deltaPosX/2);
+            myPlayer.setPosY(curPosY + deltaPosY/2);
         }
         if (event.getAction()== MotionEvent.ACTION_MOVE) {
-            myPlayer.setPosX((int) event.getX());
-            myPlayer.setPosY((int) event.getY());
+            myPlayer.setPosX(curPosX + deltaPosX/2);
+            myPlayer.setPosY(curPosY + deltaPosY/2);
         }
         return true;
     }
