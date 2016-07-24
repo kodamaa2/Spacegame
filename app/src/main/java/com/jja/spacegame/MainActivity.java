@@ -16,6 +16,7 @@ import android.view.SurfaceView;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.Enemy;
 import data.Player;
 import data.Projectile;
 
@@ -32,10 +33,13 @@ public class MainActivity extends ActionBarActivity {
 
 class StageView extends SurfaceView implements SurfaceHolder.Callback {
 
-    private StageAnimationThread saThread = null; // thread um die animationen zu steuern
+    // thread um die animationen zu steuern
+    private StageAnimationThread saThread = null;
+    // unsere "spielfiguren"
     private Player myPlayer;
     private List<Projectile> playerProjectiles;
     private List<Projectile> enemyProjectiles;
+    private List<Enemy> enemies;
 
 
     public StageView(Context ctx, AttributeSet attrs, int defStyle) {
@@ -44,6 +48,7 @@ class StageView extends SurfaceView implements SurfaceHolder.Callback {
         myPlayer = new Player (100, 100, 100, 20, 15);
         playerProjectiles = new ArrayList<>();
         enemyProjectiles = new ArrayList<>();
+        enemies = new ArrayList<>();
     }
 
 
@@ -102,14 +107,14 @@ class StageView extends SurfaceView implements SurfaceHolder.Callback {
 
                 Canvas c = null;
                 try {
-                    c = surfaceHolder.lockCanvas(null);
+                    c = surfaceHolder.lockCanvas(null); // "Start editing the pixels in the surface."
                     synchronized (surfaceHolder) {
                         if (c!=null)
                             // SpacegameView neu zeichnen
                             onDraw(c);
                     }
                 } finally {
-                    if (c != null) surfaceHolder.unlockCanvasAndPost(c);
+                    if (c != null) surfaceHolder.unlockCanvasAndPost(c); // "Finish editing pixels in the surface."
                 }
             }
         }
