@@ -5,6 +5,8 @@ package data;
  */
 public class Enemy {
 
+
+
     int eid, health, posX, posY;
     double hitboxradius, firerate;
 
@@ -17,8 +19,8 @@ public class Enemy {
         this.firerate = frate;
     }
 
-    public Projectile shoot(Projectile typ){
-
+    public Projectile shoot(int typ){
+        return new Projectile(typ, posX, posY, 1, 1, 1, 1);
     }
 
     public void move(int deltax, int deltay){
@@ -28,5 +30,53 @@ public class Enemy {
 
     public void updateHealth(int deltaHealth){
         this.health += deltaHealth;
+    }
+
+    public int getEid() {
+        return eid;
+    }
+
+    public void setEid(int eid) {
+        this.eid = eid;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public double getHitboxradius() {
+        return hitboxradius;
+    }
+
+    public void setHitboxradius(double hitboxradius) {
+        this.hitboxradius = hitboxradius;
+    }
+
+    public double getFirerate() {
+        return firerate;
+    }
+
+    public void setFirerate(double firerate) {
+        this.firerate = firerate;
     }
 }
