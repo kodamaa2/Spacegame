@@ -14,9 +14,9 @@ import com.jja.threads.StageAnimationThread;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.Enemy;
-import data.Player;
-import data.Projectile;
+import com.jja.data.Enemy;
+import com.jja.data.Player;
+import com.jja.data.Projectile;
 
 public class StageView extends SurfaceView implements SurfaceHolder.Callback {
 

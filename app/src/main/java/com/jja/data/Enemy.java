@@ -1,4 +1,4 @@
-package data;
+package com.jja.data;
 
 /**
  * Created by Julius on 24.07.2016.
