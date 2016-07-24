@@ -4,7 +4,7 @@ package data;
  * Created by Julius on 24.07.2016.
  */
 public class Projectile {
-    int pid, posX, posY, dirX, dirY, speed, damage;
+    private int pid, posX, posY, dirX, dirY, speed, damage;
 
     public Projectile(int id, int x, int y, int dx, int dy, int spd, int dmg){
         this.pid = id;
