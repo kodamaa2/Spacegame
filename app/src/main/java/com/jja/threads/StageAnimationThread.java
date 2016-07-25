@@ -21,8 +21,8 @@ public class StageAnimationThread extends Thread {
     public boolean stop = false; // boolean um festzustellen ob die Schleife weiter durchlaufen werden soll
     private SurfaceHolder surfaceHolder;
     private StageView stageView;
-
     private long timecount;
+    private boolean back = false;
 
     // constructor
     public StageAnimationThread(SurfaceHolder surfaceHolder, StageView stageView) {
@@ -38,6 +38,21 @@ public class StageAnimationThread extends Thread {
 
             // hier neue x und y positionen der Gegner usw berechnen
             // zB so
+
+            for(Enemy e : stageView.getEnemies()){
+                if(!back)
+                {
+                    e.move(10,0);
+                    if(e.getPosX() == stageView.getWidth())
+                        back = true;
+                }
+                else
+                {
+                    e.move(-10, 0);
+                    if(e.getPosX() == 0)
+                        back = false;
+                }
+            }
 
             // Bewegt alle Projektile entsprechend ihrer Richtung und Geschwindigkeit weiter
             for(int i = 0; i <  stageView.getPlayerProjectiles().size(); i++){
@@ -59,25 +74,30 @@ public class StageAnimationThread extends Thread {
 
 
             // Hier Kollisionen berechnen
-
-            for(Projectile p : stageView.getPlayerProjectiles()){
+            for(int i = 0; i < stageView.getPlayerProjectiles().size(); i++){
+                Projectile p = stageView.getPlayerProjectiles().get(i);
                 for(Enemy e : stageView.getEnemies()){
                     if(Math.pow((p.getPosX() - e.getPosX()), 2) + Math.pow((p.getPosY() - e.getPosY()), 2) < (Math.pow(e.getHitboxradius(), 2))){
                         e.updateHealth(-p.getDamage());
-                        //stageView.getPlayerProjectiles().remove(p);
                         if(e.getHealth() < 0)
                             stageView.getEnemies().remove(e);
+                        stageView.getPlayerProjectiles().remove(i);
+                        i--;
+                        break;
                     }
                 }
             }
 
             Player player = stageView.getMyPlayer();
-            for(Projectile p: stageView.getEnemyProjectiles()){
+            for(int i = 0; i < stageView.getEnemyProjectiles().size(); i++){
+                Projectile p = stageView.getEnemyProjectiles().get(i);
                 if(Math.pow((p.getPosX() - player.getPosX()), 2) + Math.pow((p.getPosY() - player.getPosY()), 2) < (Math.pow(player.getHitboxradius(), 2))){
                    player.updateHealth(-p.getDamage());
-                    //stageView.getEnemyProjectiles().remove(p);
                     if(player.getHealth() < 0)
                         System.out.println("You are dead!");
+                    stageView.getEnemyProjectiles().remove(i);
+                    i--;
+                    break;
                 }
             }
 
@@ -85,14 +105,14 @@ public class StageAnimationThread extends Thread {
             // Hier neue Projektile erstellen
             timecount++;
             // Projektile des Spielers erstellen
-            if(timecount % (stageView.getMyPlayer().getFirerate()) == 0){
-                stageView.getPlayerProjectiles().add(stageView.getPlayerProjectiles().size(), new Projectile(0, stageView.getMyPlayer().getPosX(), stageView.getMyPlayer().getPosY(), 0, -1, 12, 10));
+            if(timecount % (stageView.getMyPlayer().getFirerate()/2) == 0){
+                stageView.getPlayerProjectiles().add(stageView.getPlayerProjectiles().size(), new Projectile(0, stageView.getMyPlayer().getPosX(), stageView.getMyPlayer().getPosY(), 0, -1, 30, stageView.getMyPlayer().getDamage()));
             }
 
             // Projektile aller Gegner erstellen
             for(Enemy e : stageView.getEnemies()){
-                if(timecount % e.getFirerate() == 0)
-                    stageView.getEnemyProjectiles().add(stageView.getEnemyProjectiles().size(), new Projectile(0, e.getPosX(), e.getPosY(), 0, 1, 15, 10));
+                if(timecount % (e.getFirerate()/2) == 0)
+                    stageView.getEnemyProjectiles().add(stageView.getEnemyProjectiles().size(), new Projectile(0, e.getPosX(), e.getPosY(), 0, 1, 3, 10));
             }
 
             Canvas c = null;
