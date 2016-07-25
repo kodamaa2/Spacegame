@@ -32,12 +32,28 @@ public class StageView extends SurfaceView implements SurfaceHolder.Callback {
     public StageView(Context ctx, AttributeSet attrs, int defStyle) {
         super(ctx, attrs, defStyle);
         getHolder().addCallback(this);
-        myPlayer = new Player (100, 100, 100, 20, 15);
+        myPlayer = new Player (100, 100, 100, 20, 40);
         playerProjectiles = new ArrayList<>();
         enemyProjectiles = new ArrayList<>();
         enemies = new ArrayList<>();
+        enemies.add(new Enemy(0, 100, 400, 100, 20, 30));
     }
 
+    public Player getMyPlayer() {
+        return myPlayer;
+    }
+
+    public List<Enemy> getEnemies() {
+        return enemies;
+    }
+
+    public List<Projectile> getPlayerProjectiles() {
+        return playerProjectiles;
+    }
+
+    public List<Projectile> getEnemyProjectiles() {
+        return enemyProjectiles;
+    }
 
     // wird vom AnimationsThread aufgerufen um das naechste Bild zu zeichnen
     public void onDraw(Canvas canvas) {
@@ -48,9 +64,30 @@ public class StageView extends SurfaceView implements SurfaceHolder.Callback {
         paint.setColor(Color.BLACK);
         canvas.drawRect(0, 0, getWidth(), getHeight(), paint);
 
-        // fürs erste nur Spieler als Kreis zeichnen
+        // Spieler als Kreis zeichnen
         paint.setColor(Color.GREEN);
-        canvas.drawCircle(myPlayer.getPosX(), myPlayer.getPosY(), 20, paint);
+        canvas.drawCircle(myPlayer.getPosX(), myPlayer.getPosY(), myPlayer.getHitboxradius(), paint);
+
+        // alle Gegner zeichnen
+        paint.setColor(Color.MAGENTA);
+        for(Enemy e : enemies)
+        {
+            canvas.drawCircle(e.getPosX(), e.getPosY(), e.getHitboxradius(), paint);
+        }
+
+        // Projektile der Gegner zeichnen
+        paint.setColor(Color.RED);
+        for(Projectile p : enemyProjectiles)
+        {
+            canvas.drawCircle(p.getPosX(), p.getPosY(), 5, paint);
+        }
+
+        // Projektile des Spielers zeichnen
+        paint.setColor(Color.BLUE);
+        for(Projectile p : playerProjectiles)
+        {
+            canvas.drawCircle(p.getPosX(), p.getPosY(), 5, paint);
+        }
     }
 
     public boolean onTouchEvent (MotionEvent event) {
@@ -62,12 +99,12 @@ public class StageView extends SurfaceView implements SurfaceHolder.Callback {
         int deltaPosY = newPosY - curPosY;
 
         if (event.getAction()== MotionEvent.ACTION_DOWN) {
-            myPlayer.setPosX(curPosX + deltaPosX/2);
-            myPlayer.setPosY(curPosY + deltaPosY/2);
+            myPlayer.setPosX(curPosX + deltaPosX/10);
+            myPlayer.setPosY(curPosY + deltaPosY/10);
         }
         if (event.getAction()== MotionEvent.ACTION_MOVE) {
-            myPlayer.setPosX(curPosX + deltaPosX/2);
-            myPlayer.setPosY(curPosY + deltaPosY/2);
+            myPlayer.setPosX(curPosX + deltaPosX/10);
+            myPlayer.setPosY(curPosY + deltaPosY/10);
         }
         return true;
     }

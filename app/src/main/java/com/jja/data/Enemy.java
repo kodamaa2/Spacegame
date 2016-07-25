@@ -8,9 +8,9 @@ public class Enemy {
 
 
     private int eid, health, posX, posY;
-    private double hitboxradius, firerate;
+    private float hitboxradius, firerate;
 
-    public Enemy(int id, int hp, int x, int y, double rad, double frate){
+    public Enemy(int id, int hp, int x, int y, float rad, float frate){
         this.eid = id;
         this.health = hp;
         this.posX = x;
@@ -64,19 +64,19 @@ public class Enemy {
         this.posX = posX;
     }
 
-    public double getHitboxradius() {
+    public float getHitboxradius() {
         return hitboxradius;
     }
 
-    public void setHitboxradius(double hitboxradius) {
+    public void setHitboxradius(float hitboxradius) {
         this.hitboxradius = hitboxradius;
     }
 
-    public double getFirerate() {
+    public float getFirerate() {
         return firerate;
     }
 
-    public void setFirerate(double firerate) {
+    public void setFirerate(float firerate) {
         this.firerate = firerate;
     }
 }

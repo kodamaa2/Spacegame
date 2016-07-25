@@ -5,9 +5,9 @@ package com.jja.data;
  */
 public class Player {
     private int health, posX, posY;
-    private double hitboxradius, firerate;
+    private float hitboxradius, firerate;
 
-    public Player(int health, int posX, int posY, double hitboxradius, double firerate) {
+    public Player(int health, int posX, int posY, float hitboxradius, float firerate) {
         this.health = health;
         this.posX = posX;
         this.posY = posY;
@@ -39,19 +39,19 @@ public class Player {
         this.posY = posY;
     }
 
-    public double getHitboxradius() {
+    public float getHitboxradius() {
         return hitboxradius;
     }
 
-    public void setHitboxradius(double hitboxradius) {
+    public void setHitboxradius(float hitboxradius) {
         this.hitboxradius = hitboxradius;
     }
 
-    public double getFirerate() {
+    public float getFirerate() {
         return firerate;
     }
 
-    public void setFirerate(double firerate) {
+    public void setFirerate(float firerate) {
         this.firerate = firerate;
     }
 
