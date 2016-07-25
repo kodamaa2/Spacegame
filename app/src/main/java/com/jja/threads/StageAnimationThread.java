@@ -39,7 +39,7 @@ public class StageAnimationThread extends Thread {
             // hier neue x und y positionen der Gegner usw berechnen
             // zB so
 
-            for(Enemy e : stageView.getEnemies()){
+            /*for(Enemy e : stageView.getEnemies()){
                 if(!back)
                 {
                     e.move(10,0);
@@ -52,7 +52,7 @@ public class StageAnimationThread extends Thread {
                     if(e.getPosX() == 0)
                         back = false;
                 }
-            }
+            }*/
 
             // Bewegt alle Projektile entsprechend ihrer Richtung und Geschwindigkeit weiter
             for(int i = 0; i <  stageView.getPlayerProjectiles().size(); i++){
@@ -79,7 +79,7 @@ public class StageAnimationThread extends Thread {
                 for(Enemy e : stageView.getEnemies()){
                     if(Math.pow((p.getPosX() - e.getPosX()), 2) + Math.pow((p.getPosY() - e.getPosY()), 2) < (Math.pow(e.getHitboxradius(), 2))){
                         e.updateHealth(-p.getDamage());
-                        if(e.getHealth() < 0)
+                        if(e.getHealth() <= 0)
                             stageView.getEnemies().remove(e);
                         stageView.getPlayerProjectiles().remove(i);
                         i--;
@@ -93,7 +93,7 @@ public class StageAnimationThread extends Thread {
                 Projectile p = stageView.getEnemyProjectiles().get(i);
                 if(Math.pow((p.getPosX() - player.getPosX()), 2) + Math.pow((p.getPosY() - player.getPosY()), 2) < (Math.pow(player.getHitboxradius(), 2))){
                    player.updateHealth(-p.getDamage());
-                    if(player.getHealth() < 0)
+                    if(player.getHealth() <= 0)
                         System.out.println("You are dead!");
                     stageView.getEnemyProjectiles().remove(i);
                     i--;
@@ -105,8 +105,8 @@ public class StageAnimationThread extends Thread {
             // Hier neue Projektile erstellen
             timecount++;
             // Projektile des Spielers erstellen
-            if(timecount % (stageView.getMyPlayer().getFirerate()/2) == 0){
-                stageView.getPlayerProjectiles().add(stageView.getPlayerProjectiles().size(), new Projectile(0, stageView.getMyPlayer().getPosX(), stageView.getMyPlayer().getPosY(), 0, -1, 30, stageView.getMyPlayer().getDamage()));
+            if(timecount % (player.getFirerate()/2) == 0){
+                stageView.getPlayerProjectiles().add(stageView.getPlayerProjectiles().size(), new Projectile(0, player.getPosX(), player.getPosY(), 0, -1, 30, player.getDamage()));
             }
 
             // Projektile aller Gegner erstellen

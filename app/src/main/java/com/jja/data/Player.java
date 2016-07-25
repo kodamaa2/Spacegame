@@ -9,14 +9,7 @@ import java.util.List;
 public class Player {
     private int health, posX, posY, damage;
 
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
+    private double speedBoost;
     private float hitboxradius, firerate;
     private List<Module> moduleList;
 
@@ -26,8 +19,11 @@ public class Player {
         this.posY = posY;
         this.hitboxradius = hitboxradius;
         this.firerate = firerate;
+        this.speedBoost = 1;
+        this.damage = 10;
         this.moduleList = mdlList;
         this.processModules();
+
     }
 
     private void processModules() {
@@ -36,7 +32,22 @@ public class Player {
             {
                 this.damage += m.getDamage();
             }
+            else if(m instanceof SpeedModule)
+            {
+                this.speedBoost *= m.getSpeedBoost();
+            }
         }
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+    public double getSpeedBoost() {
+        return speedBoost;
     }
 
     public int getHealth() {
