@@ -1,18 +1,42 @@
 package com.jja.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Julius on 24.07.2016.
  */
 public class Player {
-    private int health, posX, posY;
-    private float hitboxradius, firerate;
+    private int health, posX, posY, damage;
 
-    public Player(int health, int posX, int posY, float hitboxradius, float firerate) {
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    private float hitboxradius, firerate;
+    private List<Module> moduleList;
+
+    public Player(int health, int posX, int posY, float hitboxradius, float firerate, ArrayList<Module> mdlList) {
         this.health = health;
         this.posX = posX;
         this.posY = posY;
         this.hitboxradius = hitboxradius;
         this.firerate = firerate;
+        this.moduleList = mdlList;
+        this.processModules();
+    }
+
+    private void processModules() {
+        for(Module m : moduleList){
+            if(m instanceof DamageModule)
+            {
+                this.damage += m.getDamage();
+            }
+        }
     }
 
     public int getHealth() {
