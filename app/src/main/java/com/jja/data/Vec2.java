@@ -133,7 +133,9 @@ public class Vec2 {
 
         return result.normalize();
     }
-
+    /**
+     *  liefert Vektor als String
+     */
     public String toString()
     {
         return "[" + this.x + ", " + this.y + "]";
