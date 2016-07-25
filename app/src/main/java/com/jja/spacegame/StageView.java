@@ -12,6 +12,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.jja.data.DamageModule;
+import com.jja.data.HealthModule;
 import com.jja.data.Module;
 import com.jja.data.SpeedModule;
 import com.jja.threads.StageAnimationThread;
@@ -42,7 +43,7 @@ public class StageView extends SurfaceView implements SurfaceHolder.Callback {
         ArrayList<Module> playerModules = new ArrayList<Module>();
         for(int i = 0; i < 5; i++)
         {
-            playerModules.add(i, new SpeedModule(i, 1.5));
+            playerModules.add(i, new HealthModule(i, 50));
         }
         myPlayer = new Player (100, 100, 100, 20, 40, playerModules);
         playerProjectiles = new ArrayList<>();

@@ -36,6 +36,10 @@ public class Player {
             {
                 this.speedBoost *= m.getSpeedBoost();
             }
+            else if(m instanceof HealthModule)
+            {
+                this.health += m.getHealthPoints();
+            }
         }
     }
 
