@@ -21,6 +21,7 @@ public class StageAnimationThread extends Thread {
     public boolean stop = false; // boolean um festzustellen ob die Schleife weiter durchlaufen werden soll
     private SurfaceHolder surfaceHolder;
     private StageView stageView;
+
     private long timecount;
 
     // constructor
@@ -85,13 +86,13 @@ public class StageAnimationThread extends Thread {
             timecount++;
             // Projektile des Spielers erstellen
             if(timecount % (stageView.getMyPlayer().getFirerate()) == 0){
-                stageView.getPlayerProjectiles().add(stageView.getPlayerProjectiles().size(), new Projectile(0, stageView.getMyPlayer().getPosX(), stageView.getMyPlayer().getPosY(), 0, -1, 3, 10));
+                stageView.getPlayerProjectiles().add(stageView.getPlayerProjectiles().size(), new Projectile(0, stageView.getMyPlayer().getPosX(), stageView.getMyPlayer().getPosY(), 0, -1, 12, 10));
             }
 
             // Projektile aller Gegner erstellen
             for(Enemy e : stageView.getEnemies()){
                 if(timecount % e.getFirerate() == 0)
-                    stageView.getEnemyProjectiles().add(stageView.getEnemyProjectiles().size(), new Projectile(0, e.getPosX(), e.getPosY(), 0, 1, 3, 10));
+                    stageView.getEnemyProjectiles().add(stageView.getEnemyProjectiles().size(), new Projectile(0, e.getPosX(), e.getPosY(), 0, 1, 15, 10));
             }
 
             Canvas c = null;
