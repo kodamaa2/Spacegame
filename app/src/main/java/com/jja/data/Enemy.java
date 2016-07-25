@@ -5,8 +5,6 @@ package com.jja.data;
  */
 public class Enemy {
 
-
-
     private int eid, health, posX, posY;
     private float hitboxradius, firerate;
 

@@ -1,6 +1,8 @@
 package com.jja.spacegame;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -30,6 +32,8 @@ public class StageView extends SurfaceView implements SurfaceHolder.Callback {
     private List<Projectile> playerProjectiles;
     private List<Projectile> enemyProjectiles;
     private List<Enemy> enemies;
+    // Bitmaps
+    private Bitmap bm_spaceship = BitmapFactory.decodeResource(getResources(), R.mipmap.pic_spaceship);
 
 
     public StageView(Context ctx, AttributeSet attrs, int defStyle) {
@@ -74,7 +78,8 @@ public class StageView extends SurfaceView implements SurfaceHolder.Callback {
 
         // Spieler als Kreis zeichnen
         paint.setColor(Color.GREEN);
-        canvas.drawCircle(myPlayer.getPosX(), myPlayer.getPosY(), myPlayer.getHitboxradius(), paint);
+        //canvas.drawCircle(myPlayer.getPosX(), myPlayer.getPosY(), myPlayer.getHitboxradius(), paint);
+        canvas.drawBitmap(bm_spaceship, myPlayer.getPosX() - bm_spaceship.getWidth()/2, myPlayer.getPosY() - bm_spaceship.getHeight()/2,paint);
 
         // alle Gegner zeichnen
         paint.setColor(Color.MAGENTA);
